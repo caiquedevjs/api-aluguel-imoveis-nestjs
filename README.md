@@ -11,12 +11,12 @@
 
 ## Requisitos funcionais: 
 
-### Usuario poderá consultar os imoveis cadastrados no sistema.
-### Usuario poderá filtrar os imoveis cadastrados por faixa de preço.
-### Usuario poderá alguar um imovel disponivel.
-### Imoveis alguados por algum usuario, não ficaram disponivel para alguel, apenas consulta.
-### Cada processo de alugel é gerado um contrato.
-### Usuario poderá consultar o seus contratos.
+### - Usuario poderá consultar os imoveis cadastrados no sistema.
+### - Usuario poderá filtrar os imoveis cadastrados por faixa de preço.
+### - Usuario poderá alguar um imovel disponivel.
+### - Imoveis alguados por algum usuario, não ficaram disponivel para alguel, apenas consulta.
+### - Cada processo de alugel é gerado um contrato.
+### - Usuario poderá consultar o seus contratos.
 
   
 ## technologies used 📌:
