@@ -1,6 +1,7 @@
 <p align="center">
  <h1> Aplicação Rest desenvolvida em NestJs + PrismaIO + Sqlite. Aplicação de catalogo de Imoveis e suas operações basicas </h1>
-![Diagrama de classes](https://files.fm/f/yym48k97k6)
+<img src="https://files.fm/f/yym48k97k6" alt="Descrição opcional">
+
 
   
 ## technologies used 📌:
