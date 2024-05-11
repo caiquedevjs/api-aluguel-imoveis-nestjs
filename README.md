@@ -2,6 +2,11 @@
 <p align="center">
  <h1> Aplicação Rest desenvolvida em NestJs + PrismaIO + Sqlite. Aplicação de catalogo de Imoveis e suas operações basicas </h1>
 
+
+
+
+ ## Diagrama UML das Entidades da API: 
+
 <img src="https://i.ibb.co/YXtf1v3/Captura-de-tela-de-2024-05-11-18-44-29.png" alt="Descrição opcional">
 
   
