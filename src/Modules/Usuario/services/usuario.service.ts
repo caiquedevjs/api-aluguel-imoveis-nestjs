@@ -1,5 +1,4 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import { Injectable } from '@nestjs/common';
 import { UsuarioDTOS, valoresDTOS } from '../DTOS/usuario.dtos';
 import { PrismaService } from 'src/prisma.service';
@@ -7,8 +6,10 @@ import { imovelService } from '../../Imovel/services/imovel.service';
 
 @Injectable()
 export class UsuariosService {
-  // eslint-disable-next-line prettier/prettier
+
     constructor( private PrismaService : PrismaService){}
+
+
     async createUsuario(data : UsuarioDTOS){
     
        const usuarioFind =  await this.PrismaService.usuario.findFirst({
@@ -29,14 +30,13 @@ export class UsuariosService {
       catch(error){
         console.error('error', error)
       }
-        
-    
-
     };
+
     async listerUsuario(){
       const listerUsarios = await this.PrismaService.usuario.findMany();
       return listerUsarios;
     }
+
     
     async listerImoveisValores(data: valoresDTOS) {
       const listarImoveis = await this.PrismaService.imovel.findMany({
@@ -62,9 +62,9 @@ export class UsuariosService {
       if (listarImoveis.length === 0) {
         throw new Error("Não há imóveis com esses valores");
       }
-  
       return listarImoveis;
-    }
+    };
+
     
      async listarImoviesDisponiveis(){
       try{
@@ -86,17 +86,13 @@ export class UsuariosService {
       }
     );
       if(imovelAvailability.length ===0){
-        console.error("Não imoveis disponiveis!")
+        console.error("Não há imoveis disponiveis!")
       }
-      return imovelAvailability;
-        
+      return imovelAvailability; 
       }
       catch(error){
         console.error(error)
-
-        
      };
-     }
+     };
      
-  
 };

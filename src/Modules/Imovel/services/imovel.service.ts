@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "src/prisma.service";
@@ -8,6 +7,7 @@ import { ImovelDTOS } from "../DTOS/imovel.dtos";
 @Injectable()
 export class imovelService{
     constructor( private  prismaService : PrismaService){}
+
     async createImovel(data: ImovelDTOS) {
         const imovelFind = await this.prismaService.imovel.findFirst({
             where  : {
@@ -17,7 +17,6 @@ export class imovelService{
         if(imovelFind){
              throw new Error("Esse imovel já está cadastrado no banco de dados!");
         }
-        
             try {
                 const imovel = await this.prismaService.imovel.create({
                     
@@ -38,7 +37,7 @@ export class imovelService{
     
       
       }
-      // regra de negocio para atualizar o imovel no pelo id no banco de dados 
+      // regra de negocio para atualizar o imovel  pelo id no banco de dados 
       async updateImovel(id : string, data : ImovelDTOS){
         const imovelUpdate = await this.prismaService.imovel.findUnique({
           where: {
