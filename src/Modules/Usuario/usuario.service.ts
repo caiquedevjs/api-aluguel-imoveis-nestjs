@@ -65,5 +65,38 @@ export class UsuariosService {
   
       return listarImoveis;
     }
+    
+     async listarImoviesDisponiveis(){
+      try{
+      const imovelAvailability= await this.PrismaService.imovel.findMany({
+        where :{
+          availability : true
+        },
+        select: {
+          id: true,
+          type: true,
+          description: true,
+          room: true,
+          garage: true,
+          service_area: true,
+          availability: true,
+          value: true,
+          bar_code: true,
+        },
+      }
+    );
+      if(imovelAvailability.length ===0){
+        console.error("Não imoveis disponiveis!")
+      }
+      return imovelAvailability;
+        
+      }
+      catch(error){
+        console.error(error)
+
+        
+     };
+     }
+     
   
-}
+};

@@ -22,4 +22,8 @@ async read(){
 async read_imoveis_valores(@Body() data : valoresDTOS){
     return this.usuarioService.listerImoveisValores(data)
 }
+@Get ('imoveisDisponivies')
+async read_imoveis_disponiveis(){
+  return this.usuarioService.listarImoviesDisponiveis()
+}
 }
