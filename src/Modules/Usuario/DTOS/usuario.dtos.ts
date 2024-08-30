@@ -1,9 +1,11 @@
-/* eslint-disable prettier/prettier */
-import { IsNumber, IsString } from "class-validator"
 
-/* eslint-disable prettier/prettier */
+import { Type } from "class-transformer"
+import { IsArray, IsNumber, IsOptional, IsString, ValidateNested } from "class-validator"
+import { ImovelDTOS } from "src/Modules/Imovel/DTOS/imovel.dtos"
+
 export class UsuarioDTOS{
-    
+    @IsOptional()
+    @IsString()
     id? : string
     @IsString()
     name : string
@@ -11,6 +13,11 @@ export class UsuarioDTOS{
     mail : string
     @IsString()
     password : string
+    @IsArray()
+    @IsOptional()
+    @ValidateNested({ each: true })
+    @Type(() => ImovelDTOS) // Transforma os objetos no array para o tipo ImovelDTOS
+    imoveisLista: Array<ImovelDTOS>;
     
 
 }

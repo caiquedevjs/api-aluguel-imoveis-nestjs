@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -13,29 +7,34 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model Imovel {
-  id String  @id @default(uuid()) 
-  type String
-  description String
-  room Int
-  garage Int
-  service_area Int
-  availability Boolean
-  value  Float
-  bar_code String @unique
+  id            String   @id @default(uuid())
+  type          String
+  description   String
+  room          Int
+  garage        Int
+  service_area  Int
+  availability  Boolean
+  value         Float
+  bar_code      String  @unique
   
+  // Relacionamento com Usuario
+  usuarioId     String?
+  usuario       Usuario? @relation(fields: [usuarioId], references: [id], name: "UsuarioImoveis")
 
-
-
-@@map("Imoveis")
+  @@map("Imoveis")
+  
 }
 
 model Usuario {
-  id String @id @default(uuid())
-  name String
-  mail String  @unique
-  password String 
+  id           String   @id @default(uuid())
+  name         String
+  mail         String  @unique
+  password     String
+
+  // Relacionamento com Imovel
+  imoveisLista Imovel[] @relation(name: "UsuarioImoveis")
 
   @@map("Usuarios")
+  
 }

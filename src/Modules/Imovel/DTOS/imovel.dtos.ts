@@ -1,8 +1,9 @@
 /* eslint-disable prettier/prettier */
-import { IsBoolean, IsNumber, IsString } from "class-validator";
+import { IsBoolean, IsNumber, IsOptional, IsString } from "class-validator";
 
 /* eslint-disable prettier/prettier */
 export class ImovelDTOS{
+    @IsOptional()
     @IsString()
     id? : string;
     @IsString()

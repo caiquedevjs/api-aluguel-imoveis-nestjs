@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { UsuarioDTOS, valoresDTOS } from '../DTOS/usuario.dtos';
 import { PrismaService } from 'src/prisma.service';
 import { imovelService } from '../../Imovel/services/imovel.service';
+import { ImovelDTOS } from 'src/Modules/Imovel/DTOS/imovel.dtos';
 
 @Injectable()
 export class UsuariosService {
@@ -10,27 +11,53 @@ export class UsuariosService {
     constructor( private PrismaService : PrismaService){}
 
 
-    async createUsuario(data : UsuarioDTOS){
-    
-       const usuarioFind =  await this.PrismaService.usuario.findFirst({
-        where : {
-            mail : data.mail
-        }
+    async createUsuario(data: UsuarioDTOS) {
+      // Verifica se o email já está cadastrado
+      const usuarioFind = await this.PrismaService.usuario.findFirst({
+        where: {
+          mail: data.mail,
+        },
       });
-      if(usuarioFind){
-        throw new Error("Esse mail já está cadastrado!")
+  
+      if (usuarioFind) {
+        throw new Error('Esse mail já está cadastrado!');
       }
-      try{
+  
+      try {
+        // Transformar DTO para o formato esperado pelo Prisma
+        const prismaData = {
+          name: data.name,
+          mail: data.mail,
+          password: data.password,
+          // A lista de imoveis é opcional
+          imoveisLista: data.imoveisLista ? {
+            create: data.imoveisLista.map(imovel => ({
+              type: imovel.type,
+              description: imovel.description,
+              room: imovel.room,
+              garage: imovel.garage,
+              service_area: imovel.service_area,
+              availability: imovel.availability,
+              value: imovel.value,
+              bar_code: imovel.bar_code,
+            })),
+          } : undefined,
+        };
+  
+        // Cria o novo usuário e os imóveis associados
         const usuarioCreate = await this.PrismaService.usuario.create({
-            
-                data
+          data: prismaData,
         });
+  
         return usuarioCreate;
+      } catch (error) {
+        console.error('Error creating user:', error);
+        throw new Error('Error creating user');
       }
-      catch(error){
-        console.error('error', error)
-      }
-    };
+
+
+    }
+  
 
     async listerUsuario(){
       const listerUsarios = await this.PrismaService.usuario.findMany();
@@ -95,4 +122,50 @@ export class UsuariosService {
      };
      };
      
+     async addImovelToUsuario(usuarioId: string, imovelId: string) {
+      // Verifica se o usuário existe
+      const usuario = await this.PrismaService.usuario.findUnique({
+        where: { id: usuarioId },
+      });
+  
+      if (!usuario) {
+        throw new Error('Usuário não encontrado.');
+      }
+  
+      // Verifica se o imóvel está disponível e se existe
+      const imovel = await this.PrismaService.imovel.findUnique({
+        where: { id: imovelId },
+      });
+  
+      if (!imovel) {
+        throw new Error('Imóvel não encontrado.');
+      }
+  
+      if (!imovel.availability) {
+        throw new Error('Imóvel não está disponível.');
+      }
+  
+      // Associa o imóvel ao usuário
+      try {
+        const updatedUsuario = await this.PrismaService.usuario.update({
+          where: { id: usuarioId },
+          data: {
+            imoveisLista: {
+              connect: { id: imovelId }, // Adiciona o imóvel à lista do usuário
+            },
+          },
+        });
+  
+        // Marca o imóvel como não disponível
+        await this.PrismaService.imovel.update({
+          where: { id: imovelId },
+          data: { availability: false },
+        });
+  
+        return updatedUsuario;
+      } catch (error) {
+        console.error('Erro ao associar imóvel ao usuário:', error);
+        throw new Error('Erro ao associar imóvel ao usuário');
+      }
+    }
 };

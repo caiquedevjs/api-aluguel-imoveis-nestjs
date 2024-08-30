@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Param } from '@nestjs/common';
 import { UsuariosService } from '../services/usuario.service';
 import { UsuarioDTOS, valoresDTOS } from '../DTOS/usuario.dtos';
 
@@ -25,5 +25,9 @@ async read_imoveis_valores(@Body() data : valoresDTOS){
 @Get ('imoveisDisponivies')
 async read_imoveis_disponiveis(){
   return this.usuarioService.listarImoviesDisponiveis()
+}
+@Post(':usuarioId/alugar/:imovelId')
+async alugarImovel(@Param('usuarioId') usuarioId: string, @Param('imovelId') imovelId: string) {
+  return this.usuarioService.addImovelToUsuario(usuarioId, imovelId);
 }
 }
