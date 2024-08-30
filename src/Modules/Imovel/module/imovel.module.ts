@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
-import { imoveisController } from './imovel.controller';
-import { imovelService } from './imovel.service';
+import { imoveisController } from '../controller/imovel.controller';
+import { imovelService } from '../services/imovel.service';
 import { PrismaService } from 'src/prisma.service';
 
 

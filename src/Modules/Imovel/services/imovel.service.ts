@@ -2,7 +2,7 @@
 
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "src/prisma.service";
-import { ImovelDTOS } from "./DTOS/imovel.dtos";
+import { ImovelDTOS } from "../DTOS/imovel.dtos";
 
 
 @Injectable()

@@ -1,9 +1,9 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Injectable } from '@nestjs/common';
-import { UsuarioDTOS, valoresDTOS } from './DTOS/usuario.dtos';
+import { UsuarioDTOS, valoresDTOS } from '../DTOS/usuario.dtos';
 import { PrismaService } from 'src/prisma.service';
-import { imovelService } from '../Imovel/imovel.service';
+import { imovelService } from '../../Imovel/services/imovel.service';
 
 @Injectable()
 export class UsuariosService {

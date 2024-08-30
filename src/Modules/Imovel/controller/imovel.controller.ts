@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
-import { imovelService } from './imovel.service';
-import { ImovelDTOS } from "./DTOS/imovel.dtos";
+import { imovelService } from '../services/imovel.service';
+import { ImovelDTOS } from "../DTOS/imovel.dtos";
 
 @Controller('imoveis')
 export class imoveisController {

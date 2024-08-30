@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
-import { ImoveisModule } from './Modules/Imovel/imovel.module';
-import { UsuarioModule } from './Modules/Usuario/usuario.module';
+import { ImoveisModule } from './Modules/Imovel/module/imovel.module';
+import { UsuarioModule } from './Modules/Usuario/module/usuario.module';
 
 
 @Module({

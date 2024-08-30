@@ -1,8 +1,8 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { UsuariosService } from './usuario.service';
-import { UsuarioDTOS, valoresDTOS } from './DTOS/usuario.dtos';
+import { UsuariosService } from '../services/usuario.service';
+import { UsuarioDTOS, valoresDTOS } from '../DTOS/usuario.dtos';
 
 
 @Controller('usuarios')
