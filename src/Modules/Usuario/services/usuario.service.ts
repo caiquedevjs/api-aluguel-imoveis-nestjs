@@ -168,4 +168,20 @@ export class UsuariosService {
         throw new Error('Erro ao associar imóvel ao usuário');
       }
     }
+   
+    async listarImoviesUsuario( usuarioIdfind: string){
+      const usuarioImoveis = await this.PrismaService.usuario.findUnique({
+      where :{id : usuarioIdfind},
+      include : {imoveisLista: true}
+      })
+      try{
+        if(usuarioImoveis){
+          return usuarioImoveis.imoveisLista
+        }
+      }
+      catch{
+        throw new Error('Erro ao mostrar a lista de imoveis do usuario.')
+      }
+    }
+      
 };

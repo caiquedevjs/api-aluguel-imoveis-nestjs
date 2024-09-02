@@ -30,4 +30,8 @@ async read_imoveis_disponiveis(){
 async alugarImovel(@Param('usuarioId') usuarioId: string, @Param('imovelId') imovelId: string) {
   return this.usuarioService.addImovelToUsuario(usuarioId, imovelId);
 }
+@Get(':usuarioIdfind/imoveisAlugados')
+async imoveisAlugados(@Param('usuarioIdfind') usuarioIdfind : string){
+  return this.usuarioService.listarImoviesUsuario(usuarioIdfind);
+}
 }
